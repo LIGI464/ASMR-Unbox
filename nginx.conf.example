@@ -1,0 +1,10 @@
+server {
+    listen 80;
+    server_name example.com;
+    root /var/www/unbox-asmr;
+    index index.html;
+    location / { try_files $uri $uri/ /index.html; }
+    location = /sw.js { add_header Cache-Control "no-cache"; }
+    location = /manifest.webmanifest { default_type application/manifest+json; }
+    location ~* \.(js|css|svg|webmanifest)$ { add_header Cache-Control "public, max-age=31536000, immutable"; }
+}
